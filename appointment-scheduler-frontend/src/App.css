@@ -1,0 +1,27 @@
+/* App.css */
+
+.App {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Responsive Layout */
+@media (max-width: 600px) {
+  .appointment-form-container {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .footer-content p,
+  .footer-logo h1 {
+      font-size: 1em;
+  }
+}
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+

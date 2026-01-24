@@ -1,0 +1,33 @@
+/* Footer.css */
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.philosophy p {
+    margin: 0;
+    font-size: 1em;
+    max-width: 80%;
+    text-align: center;
+}
+
+.footer-logo {
+    margin-top: 10px;
+}
+
+.footer-logo h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #4caf50; /* MedLife green color */
+}

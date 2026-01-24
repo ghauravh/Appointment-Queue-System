@@ -1,0 +1,54 @@
+/* AppointmentForm.css */
+
+.appointment-form-container {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    max-width: 500px;
+    margin: 20px auto;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.appointment-form-container h2 {
+    font-size: 1.8em;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form elements */
+}
+
+input[type="text"],
+input[type="time"] {
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #333;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
