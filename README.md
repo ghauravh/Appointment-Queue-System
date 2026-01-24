@@ -11,7 +11,7 @@ A Full-stack web application for scheduling and managing healthcare appointments
 
 ## Tech Stack
 
-- **Frontend**: React, JavaScript, HTML, CSS
+- **Frontend**: JavaScript, HTML, CSS, React
 - **Backend**: Java, Spring Boot
 - **Database**: MySQL
 
