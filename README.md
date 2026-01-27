@@ -1,6 +1,6 @@
 # Appointment Scheduler
 
-A full-stack web application for scheduling and managing healthcare appointments. This project uses a **React** frontend and a **Spring Boot** backend, with data stored in **MySQL**. This allows users to schedule appointments, view them, and manage provider information.
+A Full-stack Web application for scheduling and managing healthcare appointments. This project uses a **React** frontend and a **Spring Boot** backend, with data stored in **MySQL**. This allows users to schedule appointments, view them, and manage provider information.
 
 ## Features
 
@@ -11,7 +11,7 @@ A full-stack web application for scheduling and managing healthcare appointments
 
 ## Tech Stack
 
-- **Frontend**: React, JavaScript, HTML, CSS
+- **Frontend**: JavaScript, HTML, CSS, React
 - **Backend**: Java, Spring Boot
 - **Database**: MySQL
 
