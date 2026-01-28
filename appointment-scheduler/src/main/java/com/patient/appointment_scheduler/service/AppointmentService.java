@@ -3,30 +3,44 @@ package com.patient.appointment_scheduler.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.patient.appointment_scheduler.model.Appointment;
+import com.patient.appointment_scheduler.model.AppointmentStatus;
 import com.patient.appointment_scheduler.repository.AppointmentRepository;
 
 @Service
 public class AppointmentService {
-    @Autowired
-    private AppointmentRepository appointmentRepository;
 
-    public Appointment save(Appointment appointment) {
+    private final AppointmentRepository appointmentRepository;
+
+    public AppointmentService(AppointmentRepository appointmentRepository) {
+        this.appointmentRepository = appointmentRepository;
+    }
+
+    // BOOK APPOINTMENT
+    public Appointment bookAppointment(Appointment appointment) {
+
+        long existingCount =
+                appointmentRepository.countByAppointmentDateAndTimeAndProvider(
+                        appointment.getAppointmentDate(),
+                        appointment.getTime(),
+                        appointment.getProvider()
+                );
+
+        appointment.setQueueNumber((int) existingCount + 1);
+        appointment.setStatus(AppointmentStatus.PENDING);
+
         return appointmentRepository.save(appointment);
     }
 
-    public List<Appointment> findAll() {
+    // FIND ALL
+    public List<Appointment> findAllAppointments() {
         return appointmentRepository.findAll();
     }
 
-    public List<Appointment> findByDate(LocalDate date) {
-        return appointmentRepository.findByDate(date);
-    }
-
-    public void deleteById(Long id) {
-        appointmentRepository.deleteById(id);
+    // FIND BY DATE
+    public List<Appointment> findAppointmentsByDate(LocalDate appointmentDate) {
+        return appointmentRepository.findByAppointmentDate(appointmentDate);
     }
 }

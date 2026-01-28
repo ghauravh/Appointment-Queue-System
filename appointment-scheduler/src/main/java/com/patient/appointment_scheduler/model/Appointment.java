@@ -13,17 +13,16 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
+    @Column(name = "appointment_date")
+    private LocalDate appointmentDate;
+
     private LocalTime time;
 
-    // NEW: Queue position
     private int queueNumber;
 
-    // NEW: Appointment status
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
-    // NEW: Booking timestamp
     private LocalDateTime createdAt;
 
     @ManyToOne
@@ -32,7 +31,6 @@ public class Appointment {
     @ManyToOne
     private Provider provider;
 
-    // Automatically set values before saving
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
@@ -41,13 +39,13 @@ public class Appointment {
         }
     }
 
-    // Getters and Setters
-
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public LocalDate getAppointmentDate() { return appointmentDate; }
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
 
     public LocalTime getTime() { return time; }
     public void setTime(LocalTime time) { this.time = time; }

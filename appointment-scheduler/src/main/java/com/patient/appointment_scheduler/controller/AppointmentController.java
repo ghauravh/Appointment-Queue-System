@@ -3,42 +3,42 @@ package com.patient.appointment_scheduler.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import com.patient.appointment_scheduler.model.Appointment;
 import com.patient.appointment_scheduler.service.AppointmentService;
-// controller class 
+
 @RestController
 @RequestMapping("/api/appointments")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AppointmentController {
-    @Autowired
-    private AppointmentService appointmentService;
 
-    @PostMapping
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.save(appointment);
+    private final AppointmentService appointmentService;
+
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
     }
 
+    // 1️⃣ BOOK APPOINTMENT
+    @PostMapping
+    public Appointment bookAppointment(@RequestBody Appointment appointment) {
+        return appointmentService.bookAppointment(appointment);
+    }
+
+    // 2️⃣ GET ALL APPOINTMENTS
     @GetMapping
     public List<Appointment> getAllAppointments() {
-        return appointmentService.findAll();
+        return appointmentService.findAllAppointments();
     }
 
-    @GetMapping("/date")
-    public List<Appointment> getAppointmentsByDate(@RequestParam LocalDate date) {
-        return appointmentService.findByDate(date);
-    }
+    // 3️⃣ GET APPOINTMENTS BY DATE
+    @GetMapping("/date/{appointmentDate}")
+    public List<Appointment> getAppointmentsByDate(
+            @PathVariable
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate appointmentDate) {
 
-    @DeleteMapping("/{id}")
-    public void deleteAppointment(@PathVariable Long id) {
-        appointmentService.deleteById(id);
+        return appointmentService.findAppointmentsByDate(appointmentDate);
     }
 }
