@@ -3,6 +3,7 @@ package com.patient.appointment_scheduler.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class AppointmentService {
     }
 
     // BOOK APPOINTMENT
+    @Transactional
     public Appointment bookAppointment(Appointment appointment) {
 
         long existingCount =
@@ -46,6 +48,7 @@ public class AppointmentService {
     }
 
     // UPDATE APPOINTMENT STATUS
+    @Transactional
     public Appointment updateAppointmentStatus(Long appointmentId, AppointmentStatus status) {
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
@@ -89,6 +92,7 @@ public class AppointmentService {
 
         return appointment;
     }
+    @Transactional
     public void cancelAppointment(Long appointmentId) {
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
