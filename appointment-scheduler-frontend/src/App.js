@@ -9,16 +9,18 @@ function App() {
   return (
     <>
       <Header />
+
       <div className="app-container">
         <div className="card">
-          <h1 className="page-title">Schedule an Appointment</h1>
           <AppointmentForm />
           <AppointmentList />
         </div>
       </div>
+
       <Footer />
     </>
   );
 }
 
 export default App;
+

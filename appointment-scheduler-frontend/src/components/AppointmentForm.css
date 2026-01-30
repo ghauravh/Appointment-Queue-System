@@ -1,23 +1,38 @@
+/* Page background */
 .appointment-form-container {
-  background: linear-gradient(135deg, #0f172a, #020617);
-  padding: 24px;
-  border-radius: 16px;
-  width: 420px;
-  margin: auto;
-  color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #020617, #0f172a);
 }
 
+/* Card */
+.appointment-card {
+  background: #0b1220;
+  padding: 32px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
 
+/* Heading */
+.appointment-card h2 {
+  margin-bottom: 20px;
+  color: #e5e7eb;
+}
 
 /* Form layout */
-.appointment-form-container form {
+.appointment-card form {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
 /* Inputs */
-.appointment-form-container input {
+.appointment-card input {
   padding: 12px;
   border-radius: 8px;
   border: none;
@@ -26,33 +41,34 @@
   color: #e5e7eb;
 }
 
-.appointment-form-container input::placeholder {
+.appointment-card input::placeholder {
   color: #9ca3af;
 }
 
-.appointment-form-container input:focus {
+.appointment-card input:focus {
   outline: 2px solid #38bdf8;
 }
 
-/* Button */
-.appointment-form-container button {
+/* Button (BLUE – professional) */
+.appointment-card button {
   margin-top: 10px;
   padding: 12px;
   border-radius: 8px;
   border: none;
   font-size: 15px;
   font-weight: bold;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: white;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.appointment-form-container button:hover {
+.appointment-card button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
 }
 
+/* Success message */
 .booking-success {
   margin-top: 18px;
   padding: 12px;

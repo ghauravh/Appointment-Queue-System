@@ -11,9 +11,11 @@ const CalendarComponent = ({ onDateChange }) => {
         onDateChange(date); // Callback to parent component
     };
 
+
+
     return (
         <div className="calendar-container">
-            <h3>Select an Appointment Date</h3>
+            
             <Calendar
                 onChange={handleDateChange}
                 value={selectedDate}

@@ -1,10 +1,12 @@
 /* Container */
 .calendar-container {
-  background: #0f172a;
+  
   padding: 20px;
   border-radius: 16px;
   text-align: center;
   color: #f8fafc;
+  max-width: 360px;      /* ✅ important */
+  margin: 0 auto;
 }
 
 /* Calendar base */
@@ -14,14 +16,37 @@
   border-radius: 16px;
   padding: 16px;
   color: white;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Navigation */
+.react-calendar__navigation {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+/* Navigation buttons */
 .react-calendar__navigation button {
+  flex: 0 0 auto;
   background: #1e293b !important;
   color: white !important;
-  border-radius: 10px;
-  margin: 4px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+/* Month label */
+.react-calendar__navigation__label {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;   /* ✅ prevents wrapping */
+  overflow: hidden;      /* ✅ prevents overflow */
+  text-overflow: ellipsis;
 }
 
 .react-calendar__navigation button:hover {
