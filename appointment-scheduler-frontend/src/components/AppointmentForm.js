@@ -1,61 +1,87 @@
-import React, { useState } from 'react';
-import CalendarComponent from './CalendarComponent';
-import api from '../api';
-import './AppointmentForm.css';
+import React, { useState } from "react";
+import CalendarComponent from "./CalendarComponent";
+import api from "../api";
+import "./AppointmentForm.css";
 
 const AppointmentForm = ({ fetchAppointments }) => {
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [time, setTime] = useState('');
-    const [provider, setProvider] = useState('');
-    const [patient, setPatient] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [time, setTime] = useState("");
+  const [provider, setProvider] = useState("");
+  const [patient, setPatient] = useState("");
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const scheduleAppointment = async (event) => {
+    event.preventDefault();
+
+    if (!selectedDate) {
+      alert("Please select a date");
+      return;
+    }
+
+    const appointmentData = {
+      appointmentDate: selectedDate.toISOString().split("T")[0],
+      time: time,
+      patient: {
+        name: patient,
+      },
+      provider: {
+        name: provider,
+      },
     };
 
-    const scheduleAppointment = async (event) => {
-        event.preventDefault();
-        const appointmentData = {
-            date: selectedDate.toISOString().split('T')[0],
-            time,
-            provider,
-            patient,
-        };
-        try {
-            const response = await api.post('/appointments', appointmentData);
-            console.log('Appointment scheduled:', response.data);
-            fetchAppointments();
-        } catch (error) {
-            console.error('Error scheduling appointment:', error);
-        }
-    };
+    try {
+      const response = await api.post("/appointments", appointmentData);
+      console.log("Appointment scheduled:", response.data);
 
-    return (
-        <div className="appointment-form-container">
-            <h2>Schedule an Appointment</h2>
-            <CalendarComponent onDateChange={handleDateChange} />
-            <form onSubmit={scheduleAppointment}>
-                <input
-                    type="text"
-                    placeholder="Patient Name"
-                    value={patient}
-                    onChange={(e) => setPatient(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Provider Name"
-                    value={provider}
-                    onChange={(e) => setProvider(e.target.value)}
-                />
-                <input
-                    type="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                />
-                <button type="submit">Book Appointment</button>
-            </form>
-        </div>
-    );
+      // Reset form
+      setPatient("");
+      setProvider("");
+      setTime("");
+      setSelectedDate(null);
+
+      fetchAppointments();
+    } catch (error) {
+      console.error("Error scheduling appointment:", error);
+      alert(error.response?.data?.error || "Failed to book appointment");
+    }
+  };
+
+  return (
+    <div className="appointment-form-container">
+      {/* ❌ Removed duplicate heading */}
+      <CalendarComponent onDateChange={handleDateChange} />
+
+      <form onSubmit={scheduleAppointment}>
+        <input
+          type="text"
+          placeholder="Patient Name"
+          value={patient}
+          onChange={(e) => setPatient(e.target.value)}
+          required
+        />
+
+        <input
+          type="text"
+          placeholder="Provider Name"
+          value={provider}
+          onChange={(e) => setProvider(e.target.value)}
+          required
+        />
+
+        <input
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          required
+        />
+
+        <button type="submit">Book Appointment</button>
+      </form>
+    </div>
+  );
 };
 
 export default AppointmentForm;
