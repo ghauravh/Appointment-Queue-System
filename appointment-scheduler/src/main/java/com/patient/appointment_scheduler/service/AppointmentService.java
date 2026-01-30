@@ -88,4 +88,38 @@ public class AppointmentService {
 
         return appointment;
     }
+    public void cancelAppointment(Long appointmentId) {
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+
+        int cancelledQueueNumber = appointment.getQueueNumber();
+
+        // Mark appointment as CANCELLED
+        appointment.setStatus(AppointmentStatus.CANCELLED);
+        appointmentRepository.save(appointment);
+
+        // Get all appointments behind this one
+        List<Appointment> remainingAppointments =
+                appointmentRepository
+                        .findByAppointmentDateAndTimeAndProviderAndQueueNumberGreaterThanOrderByQueueNumberAsc(
+                                appointment.getAppointmentDate(),
+                                appointment.getTime(),
+                                appointment.getProvider(),
+                                cancelledQueueNumber
+                        );
+
+        // Shift queue numbers up
+        for (Appointment a : remainingAppointments) {
+            a.setQueueNumber(a.getQueueNumber() - 1);
+            appointmentRepository.save(a);
+        }
+
+        // If cancelled appointment was IN_PROGRESS, start next
+        if (appointment.getStatus() == AppointmentStatus.IN_PROGRESS && !remainingAppointments.isEmpty()) {
+            Appointment next = remainingAppointments.get(0);
+            next.setStatus(AppointmentStatus.IN_PROGRESS);
+            appointmentRepository.save(next);
+        }
+    }
 }

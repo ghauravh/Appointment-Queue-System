@@ -34,4 +34,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
             Provider provider,
             AppointmentStatus status
     );
+
+    List<Appointment> findByAppointmentDateAndTimeAndProviderAndQueueNumberGreaterThanOrderByQueueNumberAsc(
+            LocalDate appointmentDate,
+            LocalTime time,
+            Provider provider,
+            int queueNumber
+    );
 }
