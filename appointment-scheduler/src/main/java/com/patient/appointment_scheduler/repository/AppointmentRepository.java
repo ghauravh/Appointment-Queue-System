@@ -3,6 +3,7 @@ package com.patient.appointment_scheduler.repository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,4 +19,12 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     );
 
     List<Appointment> findByAppointmentDate(LocalDate appointmentDate);
+
+
+    Optional<Appointment> findFirstByAppointmentDateAndTimeAndProviderAndQueueNumberGreaterThanOrderByQueueNumberAsc(
+            LocalDate appointmentDate,
+            LocalTime time,
+            Provider provider,
+            int queueNumber
+    );
 }

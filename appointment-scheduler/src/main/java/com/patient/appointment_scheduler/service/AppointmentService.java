@@ -43,4 +43,32 @@ public class AppointmentService {
     public List<Appointment> findAppointmentsByDate(LocalDate appointmentDate) {
         return appointmentRepository.findByAppointmentDate(appointmentDate);
     }
+
+    // UPDATE APPOINTMENT STATUS
+    public Appointment updateAppointmentStatus(Long appointmentId, AppointmentStatus status) {
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+
+        appointment.setStatus(status);
+        appointmentRepository.save(appointment);
+
+        // AUTO-MOVE QUEUE when COMPLETED
+        if (status == AppointmentStatus.COMPLETED) {
+
+            appointmentRepository
+                    .findFirstByAppointmentDateAndTimeAndProviderAndQueueNumberGreaterThanOrderByQueueNumberAsc(
+                            appointment.getAppointmentDate(),
+                            appointment.getTime(),
+                            appointment.getProvider(),
+                            appointment.getQueueNumber()
+                    )
+                    .ifPresent(nextAppointment -> {
+                        nextAppointment.setStatus(AppointmentStatus.IN_PROGRESS);
+                        appointmentRepository.save(nextAppointment);
+                    });
+        }
+
+        return appointment;
+    }
 }

@@ -3,6 +3,7 @@ package com.patient.appointment_scheduler.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.patient.appointment_scheduler.model.AppointmentStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,14 @@ public class AppointmentController {
             LocalDate appointmentDate) {
 
         return appointmentService.findAppointmentsByDate(appointmentDate);
+    }
+
+    // 4️⃣ UPDATE APPOINTMENT STATUS
+    @PutMapping("/{id}/status")
+    public Appointment updateStatus(
+            @PathVariable Long id,
+            @RequestParam AppointmentStatus status) {
+
+        return appointmentService.updateAppointmentStatus(id, status);
     }
 }
