@@ -50,10 +50,27 @@ public class AppointmentService {
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
 
+        // 🚫 Prevent multiple IN_PROGRESS appointments
+        if (status == AppointmentStatus.IN_PROGRESS) {
+
+            boolean alreadyInProgress =
+                    appointmentRepository.existsByAppointmentDateAndTimeAndProviderAndStatus(
+                            appointment.getAppointmentDate(),
+                            appointment.getTime(),
+                            appointment.getProvider(),
+                            AppointmentStatus.IN_PROGRESS
+                    );
+
+            if (alreadyInProgress) {
+                throw new RuntimeException(
+                        "Another appointment is already IN_PROGRESS for this slot");
+            }
+        }
+
         appointment.setStatus(status);
         appointmentRepository.save(appointment);
 
-        // AUTO-MOVE QUEUE when COMPLETED
+        // 🔁 Auto-move queue when COMPLETED
         if (status == AppointmentStatus.COMPLETED) {
 
             appointmentRepository
@@ -63,9 +80,9 @@ public class AppointmentService {
                             appointment.getProvider(),
                             appointment.getQueueNumber()
                     )
-                    .ifPresent(nextAppointment -> {
-                        nextAppointment.setStatus(AppointmentStatus.IN_PROGRESS);
-                        appointmentRepository.save(nextAppointment);
+                    .ifPresent(next -> {
+                        next.setStatus(AppointmentStatus.IN_PROGRESS);
+                        appointmentRepository.save(next);
                     });
         }
 
