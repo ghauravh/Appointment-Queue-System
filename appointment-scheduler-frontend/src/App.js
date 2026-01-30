@@ -11,7 +11,7 @@ function App() {
       <Header />
       <div className="app-container">
         <div className="card">
-          <h2 className="title">Schedule an Appointment</h2>
+          <h1 className="page-title">Schedule an Appointment</h1>
           <AppointmentForm />
           <AppointmentList />
         </div>

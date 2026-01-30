@@ -8,6 +8,7 @@ const AppointmentForm = ({ fetchAppointments }) => {
   const [time, setTime] = useState("");
   const [provider, setProvider] = useState("");
   const [patient, setPatient] = useState("");
+  const [bookingResult, setBookingResult] = useState(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -34,7 +35,7 @@ const AppointmentForm = ({ fetchAppointments }) => {
 
     try {
       const response = await api.post("/appointments", appointmentData);
-      console.log("Appointment scheduled:", response.data);
+      setBookingResult(response.data);
 
       // Reset form
       setPatient("");
@@ -80,6 +81,13 @@ const AppointmentForm = ({ fetchAppointments }) => {
 
         <button type="submit">Book Appointment</button>
       </form>
+      {bookingResult && (
+  <div className="booking-success">
+    <p>✅ Appointment Booked Successfully</p>
+    <p><strong>Queue Number:</strong> {bookingResult.queueNumber}</p>
+    <p><strong>Status:</strong> {bookingResult.status}</p>
+  </div>
+)}
     </div>
   );
 };
