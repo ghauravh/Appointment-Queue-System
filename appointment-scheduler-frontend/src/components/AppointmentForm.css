@@ -1,5 +1,5 @@
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 input,
@@ -13,7 +13,8 @@ select {
 }
 
 input {
-  background-color: #f1f5f9;
+  background-color: #e5e7eb;
+  color:#000;
 }
 
 button {
