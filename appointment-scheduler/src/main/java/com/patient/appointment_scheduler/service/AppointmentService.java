@@ -3,6 +3,7 @@ package com.patient.appointment_scheduler.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.patient.appointment_scheduler.model.Appointment;
@@ -121,5 +122,34 @@ public class AppointmentService {
             next.setStatus(AppointmentStatus.IN_PROGRESS);
             appointmentRepository.save(next);
         }
+    }
+
+    @Value("${appointment.avg.service.minutes}")
+    private int avgServiceMinutes;
+
+    public int estimateWaitTime(Long appointmentId) {
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+
+        // Find current IN_PROGRESS appointment
+        Appointment current =
+                appointmentRepository
+                        .findByAppointmentDateAndTimeAndProviderAndStatus(
+                                appointment.getAppointmentDate(),
+                                appointment.getTime(),
+                                appointment.getProvider(),
+                                AppointmentStatus.IN_PROGRESS
+                        )
+                        .orElse(null);
+
+        if (current == null) {
+            return 0; // No waiting
+        }
+
+        int peopleAhead =
+                appointment.getQueueNumber() - current.getQueueNumber();
+
+        return Math.max(0, peopleAhead * avgServiceMinutes);
     }
 }

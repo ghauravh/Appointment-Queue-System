@@ -56,4 +56,10 @@ public class AppointmentController {
     public void cancelAppointment(@PathVariable Long id) {
         appointmentService.cancelAppointment(id);
     }
+
+    //  GET ESTIMATED WAIT TIME (in minutes)
+    @GetMapping("/{id}/wait-time")
+    public int getEstimatedWaitTime(@PathVariable Long id) {
+        return appointmentService.estimateWaitTime(id);
+    }
 }
