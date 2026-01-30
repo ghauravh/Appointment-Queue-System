@@ -1,19 +1,24 @@
-import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import AppointmentForm from './components/AppointmentForm';
-import './App.css';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import AppointmentForm from "./components/AppointmentForm";
+import AppointmentList from "./components/AppointmentList";
+
+import "./App.css";
 
 function App() {
-    return (
-        <div className="App">
-            <Header />
-            <main>
-                <AppointmentForm />
-            </main>
-            <Footer />
+  return (
+    <>
+      <Header />
+      <div className="app-container">
+        <div className="card">
+          <h2 className="title">Schedule an Appointment</h2>
+          <AppointmentForm />
+          <AppointmentList />
         </div>
-    );
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
