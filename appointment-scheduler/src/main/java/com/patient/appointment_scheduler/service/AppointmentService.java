@@ -3,6 +3,7 @@ package com.patient.appointment_scheduler.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.patient.appointment_scheduler.exception.InvalidAppointmentStateException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,7 @@ public class AppointmentService {
     public Appointment updateAppointmentStatus(Long appointmentId, AppointmentStatus status) {
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+                .orElseThrow(() -> new RuntimeException("Appointment not found with Id: " + appointmentId));
 
         // 🚫 Prevent multiple IN_PROGRESS appointments
         if (status == AppointmentStatus.IN_PROGRESS) {
@@ -66,7 +67,7 @@ public class AppointmentService {
                     );
 
             if (alreadyInProgress) {
-                throw new RuntimeException(
+                throw new InvalidAppointmentStateException(
                         "Another appointment is already IN_PROGRESS for this slot");
             }
         }
