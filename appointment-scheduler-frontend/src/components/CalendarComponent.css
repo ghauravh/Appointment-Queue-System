@@ -131,3 +131,16 @@
   cursor: not-allowed !important;
   position: relative;
 }
+
+.fully-booked-text {
+  display: block;
+  font-size: 9px;
+  margin-top: 2px;
+  color: #facc15; /* amber */
+  text-align: center;
+  pointer-events: none;
+}
+
+.react-calendar__tile--disabled {
+  opacity: 0.6;
+}
