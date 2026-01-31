@@ -15,26 +15,46 @@
   color: #e5e7eb;
 }
 
-/* Navigation */
+/* ===== Calendar Navigation (SAFE) ===== */
 .react-calendar__navigation {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
+/* Navigation buttons */
 .react-calendar__navigation button {
+  min-width: 36px;
+  height: 36px;
   background: #1e293b !important;
   color: #e5e7eb !important;
   border-radius: 10px;
-  padding: 8px 12px;
+  font-size: 16px;
   font-weight: 600;
+  padding: 0;
+  transition: background 0.2s ease;
 }
 
+/* Hover */
+.react-calendar__navigation button:hover {
+  background: #2563eb !important;
+}
+
+/* Month label */
 .react-calendar__navigation__label {
-  background: linear-gradient(135deg, #38bdf8, #2563eb) !important;
+  background: #0f172a !important;
+  color: #ffffff !important;
   border-radius: 12px;
-  color: white !important;
   font-weight: 700;
+  font-size: 15px;
+  padding: 6px 18px;
+  white-space: nowrap;
+}
+
+.react-calendar__navigation__label > span {
+  white-space: nowrap;
 }
 
 /* Weekdays */
