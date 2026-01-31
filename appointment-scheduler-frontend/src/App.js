@@ -13,7 +13,7 @@ function App() {
       <div className="app-container">
         <div className="card">
           <AppointmentForm />
-          <AppointmentList />
+          {/*<AppointmentList />*/}
         </div>
       </div>
 

@@ -20,6 +20,16 @@
   max-width: 100%;
 }
 
+.react-calendar {
+  pointer-events: auto !important;
+  z-index: 10;
+}
+
+.react-calendar__tile {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
 /* Navigation */
 .react-calendar__navigation {
   display: flex !important;
