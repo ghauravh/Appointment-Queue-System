@@ -107,3 +107,27 @@
   font-size: 14px;
   color: #cbd5f5;
 }
+
+.react-calendar__tile--disabled {
+  background: transparent !important;
+  color: #475569 !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+}
+
+.clinic-closed-text {
+  display: block;
+  font-size: 9px;
+  margin-top: 2px;
+  color: #f87171; /* soft red */
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Make disabled Sundays obvious */
+.react-calendar__tile--disabled {
+  background: transparent !important;
+  color: #64748b !important;
+  cursor: not-allowed !important;
+  position: relative;
+}

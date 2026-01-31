@@ -5,7 +5,7 @@ import './CalendarComponent.css';
 
 const CalendarComponent = ({ onDateChange }) => {
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // ✅ CRITICAL FIX
+  today.setHours(0, 0, 0, 0);
 
   const [selectedDate, setSelectedDate] = useState(today);
 
@@ -17,10 +17,23 @@ const CalendarComponent = ({ onDateChange }) => {
   return (
     <div className="calendar-container">
       <Calendar
-        onChange={handleDateChange}
-        value={selectedDate}
-        minDate={today}   // ✅ works correctly now
-      />
+  onChange={handleDateChange}
+  value={selectedDate}
+  minDate={today}
+
+  /* Disable Sundays */
+  tileDisabled={({ date, view }) =>
+    view === 'month' && date.getDay() === 0
+  }
+
+  /* Show "Clinic Closed" on Sundays */
+  tileContent={({ date, view }) =>
+    view === 'month' && date.getDay() === 0 ? (
+      <span className="clinic-closed-text">Clinic Closed</span>
+    ) : null
+  }
+/>
+
       <p className="selected-date">
         Selected Date: {selectedDate.toDateString()}
       </p>
