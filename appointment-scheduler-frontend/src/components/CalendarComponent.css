@@ -112,3 +112,7 @@
   font-size: 13px;
   color: #cbd5f5;
 }
+
+.react-calendar__navigation button:disabled {
+  opacity: 0.4;
+}
