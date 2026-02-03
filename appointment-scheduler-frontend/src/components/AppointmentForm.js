@@ -33,7 +33,7 @@ const scheduleAppointment = async (event) => {
   return (
     <div className="appointment-form-container">
       <div className="appointment-card">
-        <h2>Schedule an Appointment</h2>
+        <h2>Book Appointment</h2>
 
         <CalendarComponent onDateChange={handleDateChange} />
 
