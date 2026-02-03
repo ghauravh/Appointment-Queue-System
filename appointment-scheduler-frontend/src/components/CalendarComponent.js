@@ -3,21 +3,14 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarComponent.css";
 
-/* ✅ Custom clinic holidays (YYYY-MM-DD) */
-const HOLIDAYS = [
-  "2026-01-26", // Republic Day
-  "2026-08-15", // Independence Day
-  "2026-10-02", // Gandhi Jayanti
-];
+/* Clinic holidays */
+const HOLIDAYS = ["2026-01-26", "2026-10-02"];
 
-/* ✅ Max appointments per day */
+/* Booking rules (UI only) */
 const MAX_APPOINTMENTS_PER_DAY = 10;
-
-/* ✅ Mock booking counts (UI-only) */
 const BOOKED_DATES = {
-  "2026-01-31": 10,
   "2026-02-05": 10,
-  "2026-02-10": 8,
+  "2026-02-12": 10,
 };
 
 const CalendarComponent = ({ onDateChange }) => {
@@ -26,17 +19,12 @@ const CalendarComponent = ({ onDateChange }) => {
 
   const [selectedDate, setSelectedDate] = useState(today);
 
-  /* 🔹 Helper: format date as YYYY-MM-DD */
   const formatDate = (date) => date.toISOString().split("T")[0];
-
-  /* 🔹 Helper: check holiday */
   const isHoliday = (date) => HOLIDAYS.includes(formatDate(date));
-
-  /* 🔹 Helper: check fully booked */
   const isFullyBooked = (date) =>
     BOOKED_DATES[formatDate(date)] >= MAX_APPOINTMENTS_PER_DAY;
 
-  const handleDateChange = (date) => {
+  const handleChange = (date) => {
     setSelectedDate(date);
     onDateChange(date);
   };
@@ -45,37 +33,27 @@ const CalendarComponent = ({ onDateChange }) => {
     <div className="calendar-container">
       <Calendar
         value={selectedDate}
-        onChange={handleDateChange}
+        onChange={handleChange}
         minDate={today}
-
-        /* ❌ Disable Sundays, holidays, fully booked days */
         tileDisabled={({ date, view }) =>
           view === "month" &&
           (date.getDay() === 0 || isHoliday(date) || isFullyBooked(date))
         }
-
-        /* 📝 Status text on tiles */
         tileContent={({ date, view }) => {
           if (view !== "month") return null;
 
           if (date.getDay() === 0 || isHoliday(date)) {
-            return (
-              <span className="clinic-closed-text">Clinic Closed</span>
-            );
+            return <span className="status closed">Closed</span>;
           }
-
           if (isFullyBooked(date)) {
-            return (
-              <span className="fully-booked-text">Fully Booked</span>
-            );
+            return <span className="status full">Full</span>;
           }
-
           return null;
         }}
       />
 
       <p className="selected-date">
-        Selected Date: {selectedDate.toDateString()}
+        Selected: {selectedDate.toDateString()}
       </p>
     </div>
   );

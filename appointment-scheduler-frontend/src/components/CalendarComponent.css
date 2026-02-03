@@ -1,11 +1,11 @@
 .calendar-container {
   background: #020617;
+  padding: 12px;
   border-radius: 14px;
-  padding: 10px;
   margin-bottom: 14px;
 }
 
-/* Base calendar */
+/* Base */
 .react-calendar {
   width: 100%;
   background: transparent !important;
@@ -29,12 +29,9 @@
   font-size: 14px;
 }
 
-/* Month label */
 .react-calendar__navigation__label {
-  background: transparent !important;
   font-weight: 600;
   font-size: 14px;
-  color: #e5e7eb !important;
 }
 
 /* Weekdays */
@@ -67,27 +64,25 @@
   color: #475569 !important;
 }
 
-/* Labels */
-.clinic-closed-text,
-.fully-booked-text {
+/* Status labels */
+.status {
   display: block;
   font-size: 8px;
   margin-top: 1px;
   text-align: center;
 }
 
-.clinic-closed-text {
+.status.closed {
   color: #f87171;
 }
 
-.fully-booked-text {
+.status.full {
   color: #facc15;
 }
 
-/* Selected date text */
 .selected-date {
   font-size: 12px;
   color: #cbd5f5;
-  margin-top: 6px;
   text-align: center;
+  margin-top: 6px;
 }
