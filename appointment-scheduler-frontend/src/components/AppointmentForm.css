@@ -72,3 +72,56 @@
   font-size: 13px;
   text-align: center;
 }
+
+/* Time slot section */
+.time-slot-section {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.slot-title {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Grid */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+/* Slot button */
+.time-slot {
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  background: #ffffff;
+  color: #0369a1;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.time-slot:hover {
+  background: #e0f2fe;
+}
+
+/* Selected */
+.time-slot.selected {
+  background: #38bdf8;
+  color: white;
+  border-color: #38bdf8;
+}
+
+/* Disabled */
+.time-slot.disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+}
