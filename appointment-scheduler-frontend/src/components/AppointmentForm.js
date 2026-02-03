@@ -14,11 +14,20 @@ const AppointmentForm = ({ fetchAppointments }) => {
     setSelectedDate(date);
   };
 
-  const scheduleAppointment = async (event) => {
+const scheduleAppointment = async (event) => {
   event.preventDefault();
 
-  // TEMPORARY: backend not running
-  console.log("Appointment data prepared (backend OFF)");
+  if (!selectedDate) {
+    alert("Please select an appointment date");
+    return;
+  }
+
+  console.log("Appointment data prepared:", {
+    date: selectedDate.toDateString(),
+    patient,
+    provider,
+    time,
+  });
 };
 
   return (

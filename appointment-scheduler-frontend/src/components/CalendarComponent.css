@@ -1,87 +1,60 @@
-/* Container */
 .calendar-container {
-  background: linear-gradient(180deg, #0f172a, #020617);
-  padding: 18px;
-  border-radius: 18px;
-  max-width: 360px;
-  margin: 0 auto 16px;
+  background: #020617;
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 14px;
 }
 
-/* Calendar base */
+/* Base calendar */
 .react-calendar {
+  width: 100%;
   background: transparent !important;
   border: none !important;
-  width: 100%;
   color: #e5e7eb;
 }
 
-/* ===== Calendar Navigation (SAFE) ===== */
+/* Navigation */
 .react-calendar__navigation {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-/* Navigation buttons */
 .react-calendar__navigation button {
-  min-width: 36px;
-  height: 36px;
+  min-width: 32px;
+  height: 32px;
   background: #1e293b !important;
   color: #e5e7eb !important;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 0;
-  transition: background 0.2s ease;
-}
-
-/* Hover */
-.react-calendar__navigation button:hover {
-  background: #2563eb !important;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 /* Month label */
 .react-calendar__navigation__label {
-  background: #0f172a !important;
-  color: #ffffff !important;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 6px 18px;
-  white-space: nowrap;
-}
-
-.react-calendar__navigation__label > span {
-  white-space: nowrap;
+  background: transparent !important;
+  font-weight: 600;
+  font-size: 14px;
+  color: #e5e7eb !important;
 }
 
 /* Weekdays */
 .react-calendar__month-view__weekdays {
-  text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
   color: #94a3b8;
 }
 
 /* Day tiles */
 .react-calendar__tile {
-  background: #020617 !important;
-  border-radius: 12px;
-  height: 42px;
-  font-weight: 500;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 13px;
+  background: transparent !important;
 }
 
-/* Hover */
-.react-calendar__tile:hover {
-  background: #1d4ed8 !important;
-}
-
-/* Selected day */
+/* Selected */
 .react-calendar__tile--active {
-  background: #38bdf8 !important;
-  color: #020617 !important;
-  font-weight: 700;
+  background: #2563eb !important;
+  color: white !important;
 }
 
 /* Today */
@@ -89,30 +62,32 @@
   border: 1px solid #38bdf8 !important;
 }
 
-/* Disabled days */
+/* Disabled */
 .react-calendar__tile--disabled {
-  color: #64748b !important;
+  color: #475569 !important;
 }
 
-/* Status labels */
-.clinic-closed-text {
+/* Labels */
+.clinic-closed-text,
+.fully-booked-text {
   display: block;
-  font-size: 9px;
+  font-size: 8px;
+  margin-top: 1px;
+  text-align: center;
+}
+
+.clinic-closed-text {
   color: #f87171;
 }
 
 .fully-booked-text {
-  display: block;
-  font-size: 9px;
   color: #facc15;
 }
 
+/* Selected date text */
 .selected-date {
-  margin-top: 10px;
-  font-size: 13px;
+  font-size: 12px;
   color: #cbd5f5;
-}
-
-.react-calendar__navigation button:disabled {
-  opacity: 0.4;
+  margin-top: 6px;
+  text-align: center;
 }
