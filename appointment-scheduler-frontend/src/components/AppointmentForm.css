@@ -1,21 +1,21 @@
-/* Full screen mobile layout */
+/* Page */
 .appointment-form-container {
   min-height: 100vh;
-  background: #020617;
+  background: #f8fafc;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 16px;
 }
 
-/* Compact card */
+/* Card */
 .appointment-card {
   width: 100%;
-  max-width: 360px; /* mobile-first */
-  background: #0b1220;
+  max-width: 360px;
+  background: #ffffff;
   border-radius: 18px;
   padding: 18px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* Heading */
@@ -24,25 +24,18 @@
   font-weight: 700;
   text-align: center;
   margin-bottom: 12px;
-  color: #e5e7eb;
-}
-
-/* Form */
-.appointment-card form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  color: #0f172a;
 }
 
 /* Inputs */
 .appointment-card input {
   height: 42px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid #e2e8f0;
   padding: 0 12px;
   font-size: 14px;
-  background: #1e293b;
-  color: #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
 }
 
 .appointment-card input::placeholder {
@@ -50,7 +43,8 @@
 }
 
 .appointment-card input:focus {
-  outline: 2px solid #38bdf8;
+  outline: none;
+  border-color: #38bdf8;
 }
 
 /* Button */
@@ -58,7 +52,7 @@
   height: 44px;
   border-radius: 12px;
   border: none;
-  background: #2563eb;
+  background: #38bdf8;
   color: white;
   font-size: 15px;
   font-weight: 600;
@@ -73,8 +67,8 @@
 .booking-success {
   margin-top: 12px;
   padding: 10px;
-  background: #022c22;
-  color: #bbf7d0;
+  background: #ecfeff;
+  color: #0369a1;
   border-radius: 10px;
   font-size: 13px;
   text-align: center;
