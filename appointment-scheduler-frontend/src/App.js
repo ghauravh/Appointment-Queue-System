@@ -1,26 +1,15 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import React, { useState } from "react";
+import LoginPage from "./pages/LoginPage";
 import AppointmentForm from "./components/AppointmentForm";
-import AppointmentList from "./components/AppointmentList";
-
-import "./App.css";
 
 function App() {
-  return (
-    <>
-      <Header />
+  const [user, setUser] = useState(null);
 
-      <div className="app-container">
-        <div className="card">
-          <AppointmentForm />
-          {/*<AppointmentList />*/}
-        </div>
-      </div>
+  if (!user) {
+    return <LoginPage onLogin={setUser} />;
+  }
 
-      <Footer />
-    </>
-  );
+  return <AppointmentForm />;
 }
 
 export default App;
-
