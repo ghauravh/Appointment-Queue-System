@@ -16,11 +16,11 @@ const LoginPage = ({ onLogin }) => {
     // TEMP login success (frontend-only)
     onLogin({ email });
   };
-
+//login page code
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Clinic Login</h2>
+        <h2>Clinic login</h2>
 
         <form onSubmit={handleSubmit}>
           <input
