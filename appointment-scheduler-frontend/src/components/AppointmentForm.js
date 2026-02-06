@@ -1,30 +1,37 @@
 import React, { useState } from "react";
 import CalendarComponent from "./CalendarComponent";
 import { domains, providers } from "../data/providers";
-import "./AppointmentForm.css";
 import { TIME_SLOTS } from "../data/timeSlots";
 import { getBookedSlots } from "../utils/slotUtils";
+import "./AppointmentForm.css";
 
 const AppointmentForm = () => {
   const [selectedDomain, setSelectedDomain] = useState("");
   const [selectedProvider, setSelectedProvider] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const [time, setTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
+  /* Filter providers by domain */
   const filteredProviders = providers.filter(
     (p) => p.domain === selectedDomain
   );
 
- const bookedSlots = getBookedSlots(selectedProvider, selectedDate);
+  /* Get booked slots (mocked) */
+  const bookedSlots = getBookedSlots(selectedProvider, selectedDate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!selectedDate || !selectedTime) {
+      alert("Please select date and time slot");
+      return;
+    }
 
     console.log({
       domain: selectedDomain,
       provider: selectedProvider,
       date: selectedDate,
-      time,
+      time: selectedTime,
     });
 
     alert("Appointment data prepared (frontend-only)");
@@ -35,12 +42,13 @@ const AppointmentForm = () => {
       <div className="appointment-card">
         <h2>Book Clinic Appointment</h2>
 
-        {/* DOMAIN SELECT */}
+        {/* DOMAIN */}
         <select
           value={selectedDomain}
           onChange={(e) => {
             setSelectedDomain(e.target.value);
             setSelectedProvider("");
+            setSelectedTime("");
           }}
           required
         >
@@ -52,10 +60,13 @@ const AppointmentForm = () => {
           ))}
         </select>
 
-        {/* PROVIDER SELECT */}
+        {/* PROVIDER */}
         <select
           value={selectedProvider}
-          onChange={(e) => setSelectedProvider(e.target.value)}
+          onChange={(e) => {
+            setSelectedProvider(e.target.value);
+            setSelectedTime("");
+          }}
           disabled={!selectedDomain}
           required
         >
@@ -70,13 +81,33 @@ const AppointmentForm = () => {
         {/* CALENDAR */}
         <CalendarComponent onDateChange={setSelectedDate} />
 
-        {/* TIME */}
-        <input
-          type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          required
-        />
+        {/* TIME SLOTS */}
+        {selectedProvider && selectedDate && (
+          <div className="time-slot-section">
+            <div className="slot-title">Select Time Slot</div>
+
+            <div className="time-slots">
+              {TIME_SLOTS.map((slot) => {
+                const isBooked = bookedSlots.includes(slot);
+                const isSelected = selectedTime === slot;
+
+                return (
+                  <button
+                    key={slot}
+                    type="button"
+                    className={`slot-btn 
+                      ${isSelected ? "selected" : ""} 
+                      ${isBooked ? "booked" : ""}`}
+                    disabled={isBooked}
+                    onClick={() => setSelectedTime(slot)}
+                  >
+                    {slot}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <button onClick={handleSubmit}>Book Appointment</button>
       </div>
