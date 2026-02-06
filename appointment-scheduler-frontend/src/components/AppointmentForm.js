@@ -4,6 +4,8 @@ import { domains, providers } from "../data/providers";
 import { TIME_SLOTS } from "../data/timeSlots";
 import { getBookedSlots } from "../utils/slotUtils";
 import "./AppointmentForm.css";
+import { getQueueAndWaitTime } from "../utils/queueUtils";  
+
 
 const AppointmentForm = () => {
   const [selectedDomain, setSelectedDomain] = useState("");
@@ -18,6 +20,14 @@ const AppointmentForm = () => {
 
   /* Get booked slots (mocked) */
   const bookedSlots = getBookedSlots(selectedProvider, selectedDate);
+
+  const queueInfo = getQueueAndWaitTime(
+  selectedProvider,
+  selectedDate,
+  selectedTime
+);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +61,7 @@ const AppointmentForm = () => {
             setSelectedTime("");
           }}
           required
+          
         >
           <option value="">Select Medical Domain</option>
           {domains.map((domain) => (
@@ -80,7 +91,12 @@ const AppointmentForm = () => {
 
         {/* CALENDAR */}
         <CalendarComponent onDateChange={setSelectedDate} />
-
+        
+        {!selectedProvider && selectedDate && (
+  <p style={{ fontSize: "13px", color: "#64748b", marginTop: "12px" }}>
+    Please select a provider to view available time slots
+  </p>
+)}
         {/* TIME SLOTS */}
         {selectedProvider && selectedDate && (
           <div className="time-slot-section">
@@ -106,6 +122,16 @@ const AppointmentForm = () => {
                 );
               })}
             </div>
+          </div>
+        )}
+
+        {/* QUEUE & WAIT TIME */}
+        {queueInfo && (
+          <div className="booking-success">
+            <strong>Queue Number:</strong> {queueInfo.queueNumber}
+            <br />
+            <strong>Estimated Wait Time:</strong>{" "}
+            {queueInfo.estimatedWaitTime} minutes
           </div>
         )}
 
