@@ -125,3 +125,11 @@
   border-color: #e2e8f0;
   cursor: not-allowed;
 }
+
+.appointment-card select {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #f1f5f9;
+  font-size: 14px;
+}
