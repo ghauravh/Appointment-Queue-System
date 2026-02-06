@@ -1,0 +1,1 @@
+export const AVERAGE_CONSULTATION_MINUTES = 15;
