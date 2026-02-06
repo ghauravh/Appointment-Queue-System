@@ -1,4 +1,6 @@
-/* Page */
+/* =========================
+   Page Background
+========================= */
 .appointment-form-container {
   min-height: 100vh;
   background: linear-gradient(180deg, #f0f9ff, #e0f2fe);
@@ -8,8 +10,12 @@
   padding: 20px;
 }
 
-/* Card */
+/* =========================
+   Card Container
+========================= */
 .appointment-card {
+  width: 100%;
+  max-width: 420px;
   background: #ffffff;
   border-radius: 18px;
   padding: 18px;
@@ -17,17 +23,31 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Heading */
+/* =========================
+   Heading
+========================= */
 .appointment-card h2 {
   font-size: 18px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   color: #0f172a;
 }
 
-/* Inputs */
-.appointment-card input {
+/* =========================
+   Form Layout
+========================= */
+.appointment-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =========================
+   Inputs & Select
+========================= */
+.appointment-card input,
+.appointment-card select {
   height: 42px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
@@ -41,12 +61,15 @@
   color: #94a3b8;
 }
 
-.appointment-card input:focus {
+.appointment-card input:focus,
+.appointment-card select:focus {
   outline: none;
   border-color: #38bdf8;
 }
 
-/* Button */
+/* =========================
+   Button
+========================= */
 .appointment-card button {
   height: 44px;
   border-radius: 12px;
@@ -56,46 +79,42 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
 .appointment-card button:active {
   transform: scale(0.98);
 }
 
-/* Success */
-.booking-success {
-  margin-top: 12px;
-  padding: 10px;
-  background: #ecfeff;
-  color: #0369a1;
-  border-radius: 10px;
-  font-size: 13px;
-  text-align: center;
-}
-
-/* Time slot section */
+/* =========================
+   Time Slot Section
+========================= */
 .time-slot-section {
   margin-top: 16px;
-  text-align: left;
 }
 
 .slot-title {
   font-size: 14px;
-  margin-bottom: 8px;
-  color: #0f172a;
   font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8px;
 }
 
-/* Grid */
+/* =========================
+   Time Slots Grid
+========================= */
 .time-slots {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
-/* Slot button */
-.time-slot {
-  padding: 10px 0;
+/* =========================
+   Slot Button
+========================= */
+.slot-btn {
+  padding: 10px;
   border-radius: 10px;
   border: 1px solid #cbd5f5;
   background: #ffffff;
@@ -107,29 +126,38 @@
 }
 
 /* Hover */
-.time-slot:hover {
+.slot-btn:hover {
   background: #e0f2fe;
 }
 
 /* Selected */
-.time-slot.selected {
+.slot-btn.selected {
   background: #38bdf8;
   color: white;
   border-color: #38bdf8;
 }
 
-/* Disabled */
-.time-slot.disabled {
+/* Booked / Disabled */
+.slot-btn.booked {
   background: #f1f5f9;
   color: #94a3b8;
   border-color: #e2e8f0;
   cursor: not-allowed;
 }
 
-.appointment-card select {
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  background: #f1f5f9;
-  font-size: 14px;
+.slot-btn:disabled {
+  pointer-events: none;
+}
+
+/* =========================
+   Success Message
+========================= */
+.booking-success {
+  margin-top: 12px;
+  padding: 10px;
+  background: #ecfeff;
+  color: #0369a1;
+  border-radius: 10px;
+  font-size: 13px;
+  text-align: center;
 }

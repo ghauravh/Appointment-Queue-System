@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CalendarComponent from "./CalendarComponent";
 import { domains, providers } from "../data/providers";
 import "./AppointmentForm.css";
+import { TIME_SLOTS } from "../data/timeSlots";
+import { getBookedSlots } from "../utils/slotUtils";
 
 const AppointmentForm = () => {
   const [selectedDomain, setSelectedDomain] = useState("");
@@ -12,6 +14,8 @@ const AppointmentForm = () => {
   const filteredProviders = providers.filter(
     (p) => p.domain === selectedDomain
   );
+
+ const bookedSlots = getBookedSlots(selectedProvider, selectedDate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
