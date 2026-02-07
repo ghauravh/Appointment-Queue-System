@@ -126,14 +126,14 @@ const AppointmentForm = () => {
         )}
 
         {/* QUEUE & WAIT TIME */}
-        {queueInfo && (
-          <div className="booking-success">
-            <strong>Queue Number:</strong> {queueInfo.queueNumber}
-            <br />
-            <strong>Estimated Wait Time:</strong>{" "}
-            {queueInfo.estimatedWaitTime} minutes
-          </div>
-        )}
+{queueInfo && selectedTime && (
+  <div className="booking-success">
+    <strong>Queue Number:</strong> {queueInfo.queueNumber}
+    <br />
+    <strong>Estimated Wait Time:</strong>{" "}
+    {queueInfo.estimatedWaitTime} minutes
+  </div>
+)}
 
         <button onClick={handleSubmit}>Book Appointment</button>
       </div>
