@@ -125,7 +125,7 @@ const AppointmentForm = () => {
           </div>
         )}
 
-        {/* QUEUE & WAIT TIME */}
+        {/* QUEUE & WAITING TIME */}
 {queueInfo && selectedTime && (
   <div className="booking-success">
     <strong>Queue Number:</strong> {queueInfo.queueNumber}
