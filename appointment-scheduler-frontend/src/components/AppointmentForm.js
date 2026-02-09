@@ -5,6 +5,8 @@ import { TIME_SLOTS } from "../data/timeSlots";
 import { getBookedSlots } from "../utils/slotUtils";
 import "./AppointmentForm.css";
 import { getQueueAndWaitTime } from "../utils/queueUtils";  
+import { getRecommendedSlot } from "../utils/recommendSlot";
+
 
 
 const AppointmentForm = () => {
@@ -12,6 +14,11 @@ const AppointmentForm = () => {
   const [selectedProvider, setSelectedProvider] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
+  const recommended = getRecommendedSlot(
+  selectedProvider,
+  selectedDate,
+  TIME_SLOTS
+);
 
   /* Filter providers by domain */
   const filteredProviders = providers.filter(
