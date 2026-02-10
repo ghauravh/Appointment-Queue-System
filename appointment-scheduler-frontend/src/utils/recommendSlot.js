@@ -1,5 +1,5 @@
 import { getQueueAndWaitTime } from "./queueUtils";
-// recomendation slot
+// recomendation slots
 export const getRecommendedSlot = (
   provider,
   date,
