@@ -19,6 +19,7 @@ const AppointmentForm = () => {
   selectedDate,
   TIME_SLOTS
 );
+const MAX_WAIT_TIME = 60;
 
   /* Filter providers by domain */
   const filteredProviders = providers.filter(
@@ -103,6 +104,22 @@ const AppointmentForm = () => {
   <p style={{ fontSize: "13px", color: "#64748b", marginTop: "12px" }}>
     Please select a provider to view available time slots
   </p>
+)}
+{/* HIGH WAIT TIME WARNING */}
+{queueInfo && queueInfo.estimatedWaitTime > MAX_WAIT_TIME && (
+  <div
+    style={{
+      marginTop: "10px",
+      padding: "10px",
+      borderRadius: "10px",
+      background: "#fff7ed",
+      color: "#9a3412",
+      fontSize: "13px",
+      border: "1px solid #fed7aa",
+    }}
+  >
+    ⚠ High waiting time. Consider choosing another slot for faster service.
+  </div>
 )}
         {/* TIME SLOTS */}
         {selectedProvider && selectedDate && (
