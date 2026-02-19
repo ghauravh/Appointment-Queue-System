@@ -6,7 +6,7 @@ import { getBookedSlots } from "../utils/slotUtils";
 import "./AppointmentForm.css";
 import { getQueueAndWaitTime } from "../utils/queueUtils";  
 import { getRecommendedSlot } from "../utils/recommendSlot";
-
+// comment
 
 
 const AppointmentForm = () => {
