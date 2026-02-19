@@ -47,22 +47,20 @@ const MAX_WAIT_TIME = 60;
 
   const newAppointment = {
     id: Date.now(),
-    domain: selectedDomain,
-    provider: selectedProvider,
     date: selectedDate.toDateString(),
     time: selectedTime,
-    status: "Pending",
+    provider: selectedProvider,
+    status: "Confirmed",
   };
 
-  const existing =
-    JSON.parse(localStorage.getItem("appointments")) || [];
-
+  // Save to localStorage (temporary storage)
+  const existing = JSON.parse(localStorage.getItem("appointments")) || [];
   localStorage.setItem(
     "appointments",
     JSON.stringify([...existing, newAppointment])
   );
 
-  alert("Appointment booked successfully!");
+  alert("Appointment Booked Successfully!");
 };
 
   
