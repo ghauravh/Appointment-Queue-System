@@ -38,22 +38,34 @@ const MAX_WAIT_TIME = 60;
 
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!selectedDate || !selectedTime) {
-      alert("Please select date and time slot");
-      return;
-    }
+  if (!selectedDate || !selectedTime) {
+    alert("Please select date and time slot");
+    return;
+  }
 
-    console.log({
-      domain: selectedDomain,
-      provider: selectedProvider,
-      date: selectedDate,
-      time: selectedTime,
-    });
-
-    alert("Appointment data prepared (frontend-only)");
+  const newAppointment = {
+    id: Date.now(),
+    domain: selectedDomain,
+    provider: selectedProvider,
+    date: selectedDate.toDateString(),
+    time: selectedTime,
+    status: "Pending",
   };
+
+  const existing =
+    JSON.parse(localStorage.getItem("appointments")) || [];
+
+  localStorage.setItem(
+    "appointments",
+    JSON.stringify([...existing, newAppointment])
+  );
+
+  alert("Appointment booked successfully!");
+};
+
+  
 
   return (
     <div className="appointment-form-container">
