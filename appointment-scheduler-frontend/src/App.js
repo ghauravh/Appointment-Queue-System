@@ -3,31 +3,10 @@ import LoginPage from "./pages/LoginPage";
 import AppointmentForm from "./components/AppointmentForm";
 import "./App.css";
 
+import PatientDashboard from "./components/PatientDashboard";
+
 function App() {
-  const [user, setUser] = useState(null);
-
-  const handleLogin = (userData) => {
-    setUser(userData);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
-
-  return (
-    <>
-      {user ? (
-        <>
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
-          <AppointmentForm />
-        </>
-      ) : (
-        <LoginPage onLogin={handleLogin} />
-      )}
-    </>
-  );
+  return <PatientDashboard />;
 }
 
 export default App;
