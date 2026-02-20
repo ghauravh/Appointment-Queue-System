@@ -16,9 +16,16 @@ import com.patient.appointment_scheduler.repository.AppointmentRepository;
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final WaitTimePredictorService waitTimePredictorService;
 
-    public AppointmentService(AppointmentRepository appointmentRepository) {
+
+
+    public AppointmentService(
+            AppointmentRepository appointmentRepository,
+            WaitTimePredictorService waitTimePredictorService
+    ) {
         this.appointmentRepository = appointmentRepository;
+        this.waitTimePredictorService = waitTimePredictorService;
     }
 
     // BOOK APPOINTMENT
@@ -34,6 +41,15 @@ public class AppointmentService {
 
         appointment.setQueueNumber((int) existingCount + 1);
         appointment.setStatus(AppointmentStatus.PENDING);
+
+        int predictedWait =
+                waitTimePredictorService.predictWaitTime(
+                        appointment.getProvider(),
+                        appointment.getAppointmentDate(),
+                        appointment.getTime()
+                );
+
+        appointment.setPredictedWaitTime(predictedWait);
 
         return appointmentRepository.save(appointment);
     }

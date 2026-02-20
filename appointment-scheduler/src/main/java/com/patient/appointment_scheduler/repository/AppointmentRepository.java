@@ -21,6 +21,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     List<Appointment> findByAppointmentDate(LocalDate appointmentDate);
 
+    List<Appointment> findByProvider(Provider provider);
+
 
     Optional<Appointment> findFirstByAppointmentDateAndTimeAndProviderAndQueueNumberGreaterThanOrderByQueueNumberAsc(
             LocalDate appointmentDate,

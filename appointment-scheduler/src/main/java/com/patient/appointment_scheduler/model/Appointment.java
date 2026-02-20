@@ -39,6 +39,16 @@ public class Appointment {
         }
     }
 
+    private int predictedWaitTime;
+
+    public int getPredictedWaitTime() {
+        return predictedWaitTime;
+    }
+
+    public void setPredictedWaitTime(int predictedWaitTime) {
+        this.predictedWaitTime = predictedWaitTime;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
