@@ -1,59 +1,87 @@
+/* Page */
 .admin-container {
   min-height: 100vh;
-  background: #f8fafc;
+  background: linear-gradient(180deg, #f0f9ff, #e0f2fe);
   display: flex;
   justify-content: center;
-  padding: 30px;
+  padding: 20px;
 }
 
+/* Card */
 .admin-card {
   width: 100%;
-  max-width: 700px;
-  background: white;
+  max-width: 600px;
+  background: #ffffff;
   border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
+/* Heading */
 .admin-card h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  color: #0f172a;
 }
 
+/* Filters */
 .admin-filters {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
+.admin-filters select,
 .admin-filters input {
-  flex: 1;
-  padding: 8px;
-  border-radius: 8px;
+  height: 42px;
+  border-radius: 10px;
   border: 1px solid #e2e8f0;
-}
-
-.admin-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  padding: 0 12px;
   font-size: 14px;
 }
 
-.admin-item {
-  padding: 12px;
+/* Appointment list */
+.admin-appointment {
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  margin-bottom: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background: #f8fafc;
 }
 
-.complete-btn {
-  margin-top: 6px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: none;
-  background: #10b981;
-  color: white;
+.admin-appointment p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
   font-size: 12px;
-  cursor: pointer;
+  font-weight: 600;
+}
+
+.status-badge.confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.cancelled {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.status-badge.pending {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+/* Mobile Safe */
+@media (max-width: 500px) {
+  .admin-card {
+    padding: 14px;
+  }
 }
