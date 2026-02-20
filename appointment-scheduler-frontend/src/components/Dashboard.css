@@ -1,4 +1,4 @@
-/* Full page background */
+/* Page background */
 .dashboard-container {
   min-height: 100vh;
   background: linear-gradient(180deg, #f0f9ff, #e0f2fe);
@@ -8,44 +8,54 @@
   padding: 40px 20px;
 }
 
-/* Main white card */
+/* Card */
 .dashboard-card {
   width: 100%;
   max-width: 500px;
-  background: white;
-  padding: 24px;
+  background: #ffffff;
   border-radius: 18px;
+  padding: 24px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Heading */
+/* Title */
 .dashboard-card h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #0f172a;
+  color: #0f172a; /* dark text */
 }
 
-/* Appointment list */
+/* Appointment List */
 .appointment-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
-/* Individual appointment */
+/* Appointment Item */
 .appointment-item {
-  border: 1px solid #e2e8f0;
-  padding: 14px;
-  border-radius: 12px;
   background: #f8fafc;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  color: #0f172a; /* force dark text */
 }
 
+/* Text inside appointment */
+.appointment-item p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+/* Status badge */
 .status-badge {
   display: inline-block;
-  margin-top: 6px;
-  padding: 4px 10px;
+  margin-top: 8px;
+  padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
+  font-weight: 600;
   background: #38bdf8;
   color: white;
 }

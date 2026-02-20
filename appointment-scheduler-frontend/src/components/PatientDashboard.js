@@ -9,6 +9,20 @@ const PatientDashboard = () => {
     setAppointments(stored);
   }, []);
 
+  const cancelAppointment = (id) => {
+    const updatedAppointments = appointments.map((appt) =>
+      appt.id === id
+        ? { ...appt, status: "Cancelled" }
+        : appt
+    );
+
+    setAppointments(updatedAppointments);
+    localStorage.setItem(
+      "appointments",
+      JSON.stringify(updatedAppointments)
+    );
+  };
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-card">
@@ -23,7 +37,19 @@ const PatientDashboard = () => {
                 <p><strong>Date:</strong> {appt.date}</p>
                 <p><strong>Time:</strong> {appt.time}</p>
                 <p><strong>Provider:</strong> {appt.provider}</p>
-                <span className="status-badge">{appt.status}</span>
+
+                <span className={`status-badge ${appt.status.toLowerCase()}`}>
+                  {appt.status}
+                </span>
+
+                {appt.status !== "Cancelled" && (
+                  <button
+                    className="cancel-btn"
+                    onClick={() => cancelAppointment(appt.id)}
+                  >
+                    Cancel
+                  </button>
+                )}
               </div>
             ))}
           </div>
