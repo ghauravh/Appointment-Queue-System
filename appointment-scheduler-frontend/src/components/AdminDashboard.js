@@ -18,6 +18,7 @@ const AdminDashboard = () => {
 
     setAppointments(updated);
     localStorage.setItem("appointments", JSON.stringify(updated));
+
   };
 
   const filteredAppointments = appointments.filter((appt) => {
@@ -33,63 +34,67 @@ const AdminDashboard = () => {
   ).length;
 
   return (
-    <div className="admin-container">
-      <div className="admin-card">
-        <h2>Admin Dashboard</h2>
+  <div className="admin-container">
+    <div className="admin-card">
 
-        {/* Filters */}
-        <div className="admin-filters">
-          <input
-            type="text"
-            placeholder="Filter by Provider"
-            value={filterProvider}
-            onChange={(e) => setFilterProvider(e.target.value)}
-          />
+      <h2>Admin Dashboard</h2>
 
-          <input
-            type="date"
-            value={filterDate}
-            onChange={(e) => setFilterDate(e.target.value)}
-          />
-        </div>
+      {/* Filters */}
+      <div className="admin-filters">
+        <input
+          type="text"
+          placeholder="Filter by Provider"
+          value={filterProvider}
+          onChange={(e) => setFilterProvider(e.target.value)}
+        />
 
-        {/* Stats */}
-        <div className="admin-stats">
-          <p><strong>Total:</strong> {totalAppointments}</p>
-          <p><strong>Completed:</strong> {completedCount}</p>
-          <p><strong>Pending:</strong> {totalAppointments - completedCount}</p>
-        </div>
-
-        {/* Appointment List */}
-        <div className="admin-list">
-          {filteredAppointments.length === 0 ? (
-            <p>No appointments found.</p>
-          ) : (
-            filteredAppointments.map((appt) => (
-              <div key={appt.id} className="admin-item">
-                <p><strong>Date:</strong> {appt.date}</p>
-                <p><strong>Time:</strong> {appt.time}</p>
-                <p><strong>Provider:</strong> {appt.provider}</p>
-
-                <span className={`status-badge ${appt.status.toLowerCase()}`}>
-                  {appt.status}
-                </span>
-
-                {appt.status === "Pending" && (
-                  <button
-                    className="complete-btn"
-                    onClick={() => updateStatus(appt.id, "Completed")}
-                  >
-                    Mark Completed
-                  </button>
-                )}
-              </div>
-            ))
-          )}
-        </div>
+        <input
+          type="date"
+          value={filterDate}
+          onChange={(e) => setFilterDate(e.target.value)}
+        />
       </div>
+
+      {/* Appointments */}
+      <div className="admin-appointment-list">
+        {appointments.map((appt) => (
+          <div key={appt.id} className="admin-appointment-item">
+
+  <div className="appointment-info">
+    <p><strong>Date:</strong> {appt.date}</p>
+    <p><strong>Time:</strong> {appt.time}</p>
+    <p><strong>Provider:</strong> {appt.provider}</p>
+  </div>
+
+  <div className="appointment-actions">
+    <span className={`status-badge ${appt.status.toLowerCase()}`}>
+      {appt.status}
+    </span>
+
+    <div className="action-buttons">
+      <button
+        className="confirm-btn"
+        onClick={() => updateStatus(appt.id, "Confirmed")}
+      >
+        Confirm
+      </button>
+
+      <button
+        className="cancel-btn"
+        onClick={() => updateStatus(appt.id, "Cancelled")}
+      >
+        Cancel
+      </button>
     </div>
-  );
+  </div>
+
+</div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+);
 };
 
 export default AdminDashboard;
