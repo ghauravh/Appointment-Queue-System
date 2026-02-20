@@ -118,6 +118,10 @@
   align-items: center;
 }
 
+.appointment-info {
+  flex: 1;
+}
+
 .appointment-info p {
   margin: 4px 0;
   color: #0f172a;
