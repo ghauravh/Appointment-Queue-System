@@ -3,6 +3,9 @@ import "./Dashboard.css";
 
 const PatientDashboard = () => {
   const [appointments, setAppointments] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [newDate, setNewDate] = useState("");
+  const [newTime, setNewTime] = useState("");
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("appointments")) || [];
@@ -10,17 +13,38 @@ const PatientDashboard = () => {
   }, []);
 
   const cancelAppointment = (id) => {
-    const updatedAppointments = appointments.map((appt) =>
+    const updated = appointments.map((appt) =>
       appt.id === id
         ? { ...appt, status: "Cancelled" }
         : appt
     );
 
-    setAppointments(updatedAppointments);
-    localStorage.setItem(
-      "appointments",
-      JSON.stringify(updatedAppointments)
+    setAppointments(updated);
+    localStorage.setItem("appointments", JSON.stringify(updated));
+  };
+
+  const handleReschedule = (id) => {
+    setEditingId(id);
+  };
+
+  const saveReschedule = (id) => {
+    if (!newDate || !newTime) {
+      alert("Please select new date and time");
+      return;
+    }
+
+    const updated = appointments.map((appt) =>
+      appt.id === id
+        ? { ...appt, date: newDate, time: newTime, status: "Pending" }
+        : appt
     );
+
+    setAppointments(updated);
+    localStorage.setItem("appointments", JSON.stringify(updated));
+
+    setEditingId(null);
+    setNewDate("");
+    setNewTime("");
   };
 
   return (
@@ -43,12 +67,45 @@ const PatientDashboard = () => {
                 </span>
 
                 {appt.status !== "Cancelled" && (
-                  <button
-                    className="cancel-btn"
-                    onClick={() => cancelAppointment(appt.id)}
-                  >
-                    Cancel
-                  </button>
+                  <div className="action-buttons">
+                    <button
+                      className="cancel-btn"
+                      onClick={() => cancelAppointment(appt.id)}
+                    >
+                      Cancel
+                    </button>
+
+                    <button
+                      className="reschedule-btn"
+                      onClick={() => handleReschedule(appt.id)}
+                    >
+                      Reschedule
+                    </button>
+                  </div>
+                )}
+
+                {/* Reschedule Form */}
+                {editingId === appt.id && (
+                  <div className="reschedule-form">
+                    <input
+                      type="date"
+                      value={newDate}
+                      onChange={(e) => setNewDate(e.target.value)}
+                    />
+
+                    <input
+                      type="time"
+                      value={newTime}
+                      onChange={(e) => setNewTime(e.target.value)}
+                    />
+
+                    <button
+                      className="save-btn"
+                      onClick={() => saveReschedule(appt.id)}
+                    >
+                      Save
+                    </button>
+                  </div>
                 )}
               </div>
             ))}
