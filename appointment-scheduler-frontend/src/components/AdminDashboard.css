@@ -1,0 +1,59 @@
+.admin-container {
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.admin-card {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.admin-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.admin-filters input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.admin-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.admin-item {
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.complete-btn {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  background: #10b981;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
