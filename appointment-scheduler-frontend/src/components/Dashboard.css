@@ -92,3 +92,47 @@
   background: #fee2e2;
   color: #b91c1c;
 }
+
+.action-buttons {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.cancel-btn {
+  padding: 6px 12px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.reschedule-btn {
+  padding: 6px 12px;
+  background: #38bdf8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.save-btn {
+  padding: 6px 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.reschedule-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
