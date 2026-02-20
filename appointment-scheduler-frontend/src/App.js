@@ -1,35 +1,35 @@
 import React, { useState } from "react";
 import LoginPage from "./pages/LoginPage";
 import AppointmentForm from "./components/AppointmentForm";
-import AdminDashboard from "./components/AdminDashboard";
 import PatientDashboard from "./components/PatientDashboard";
-import "./App.css";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
-  const [user, setUser] = useState(null);  // stores logged in user
-  const [role, setRole] = useState(null);  // "patient" or "admin"
+  const [user, setUser] = useState(null);
+  const [page, setPage] = useState("book");
 
+  // Not logged in → show login
   if (!user) {
-    return (
-      <LoginPage
-        onLogin={(userData) => {
-          setUser(userData);
-
-          // Simple role logic (temporary)
-          if (userData.email === "admin@clinic.com") {
-            setRole("admin");
-          } else {
-            setRole("patient");
-          }
-        }}
-      />
-    );
+    return <LoginPage onLogin={setUser} />;
   }
 
+  // Admin
+  if (user.role === "admin") {
+    return <AdminDashboard />;
+  }
+
+  // Patient
   return (
     <>
-      {role === "admin" && <AdminDashboard />}
-      {role === "patient" && <AppointmentForm />}
+      {page === "book" && (
+        <AppointmentForm
+          onBookingSuccess={() => setPage("dashboard")}
+        />
+      )}
+
+      {page === "dashboard" && (
+        <PatientDashboard />
+      )}
     </>
   );
 }

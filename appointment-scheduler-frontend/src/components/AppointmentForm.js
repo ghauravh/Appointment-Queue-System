@@ -9,7 +9,7 @@ import { getRecommendedSlot } from "../utils/recommendSlot";
 // comment
 
 
-const AppointmentForm = () => {
+const AppointmentForm = ({onBookingSuccess}) => {
   const [selectedDomain, setSelectedDomain] = useState("");
   const [selectedProvider, setSelectedProvider] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
@@ -61,6 +61,7 @@ const MAX_WAIT_TIME = 60;
   );
 
   alert("Appointment Booked Successfully!");
+  onBookingSuccess();
 };
 
   

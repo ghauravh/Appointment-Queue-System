@@ -6,16 +6,20 @@ const LoginPage = ({ onLogin }) => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!email || !password) {
-      alert("Please enter email and password");
-      return;
-    }
+  if (!email || !password) {
+    alert("Enter email and password");
+    return;
+  }
 
-    // TEMP login success (frontend-only)
-    onLogin({ email });
-  };
+  // TEMP role logic
+  if (email === "admin@clinic.com") {
+    onLogin({ email, role: "admin" });
+  } else {
+    onLogin({ email, role: "patient" });
+  }
+};
 //login page code
   return (
     <div className="login-container">
