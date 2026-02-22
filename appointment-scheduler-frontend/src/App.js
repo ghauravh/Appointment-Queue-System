@@ -3,7 +3,7 @@ import LoginPage from "./pages/LoginPage";
 import AppointmentForm from "./components/AppointmentForm";
 import PatientDashboard from "./components/PatientDashboard";
 import AdminDashboard from "./components/AdminDashboard";
-
+//c
 function App() {
   const [user, setUser] = useState(null);
   const [page, setPage] = useState("book");
