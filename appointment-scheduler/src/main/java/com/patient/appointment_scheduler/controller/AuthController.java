@@ -1,5 +1,7 @@
 package com.patient.appointment_scheduler.controller;
 
+
+
 import com.patient.appointment_scheduler.model.Role;
 import com.patient.appointment_scheduler.model.User;
 import com.patient.appointment_scheduler.repository.UserRepository;
@@ -7,6 +9,8 @@ import com.patient.appointment_scheduler.security.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
