@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Lock;
+import jakarta.persistence.LockModeType;
 
 import com.patient.appointment_scheduler.model.AppointmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +16,15 @@ import com.patient.appointment_scheduler.model.Provider;
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
     long countByAppointmentDateAndTimeAndProvider(
+            LocalDate appointmentDate,
+            LocalTime time,
+            Provider provider
+    );
+
+
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    List<Appointment> findByAppointmentDateAndTimeAndProvider(
             LocalDate appointmentDate,
             LocalTime time,
             Provider provider
