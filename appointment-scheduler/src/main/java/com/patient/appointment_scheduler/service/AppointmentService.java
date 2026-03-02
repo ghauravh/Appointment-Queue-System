@@ -29,27 +29,23 @@ public class AppointmentService {
     }
 
     // BOOK APPOINTMENT
+
+
     @Transactional
     public Appointment bookAppointment(Appointment appointment) {
 
-        long existingCount =
-                appointmentRepository.countByAppointmentDateAndTimeAndProvider(
+        // 🔒 Lock rows for this slot
+        List<Appointment> existingAppointments =
+                appointmentRepository.findByAppointmentDateAndTimeAndProvider(
                         appointment.getAppointmentDate(),
                         appointment.getTime(),
                         appointment.getProvider()
                 );
 
-        appointment.setQueueNumber((int) existingCount + 1);
+        int nextQueueNumber = existingAppointments.size() + 1;
+
+        appointment.setQueueNumber(nextQueueNumber);
         appointment.setStatus(AppointmentStatus.PENDING);
-
-        int predictedWait =
-                waitTimePredictorService.predictWaitTime(
-                        appointment.getProvider(),
-                        appointment.getAppointmentDate(),
-                        appointment.getTime()
-                );
-
-        appointment.setPredictedWaitTime(predictedWait);
 
         return appointmentRepository.save(appointment);
     }
